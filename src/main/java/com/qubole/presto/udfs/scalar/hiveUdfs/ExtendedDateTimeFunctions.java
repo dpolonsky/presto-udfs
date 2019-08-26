@@ -15,11 +15,11 @@
  */
 package com.qubole.presto.udfs.scalar.hiveUdfs;
 
-import com.facebook.presto.spi.ConnectorSession;
-import com.facebook.presto.spi.function.Description;
-import com.facebook.presto.spi.function.ScalarFunction;
-import com.facebook.presto.spi.function.SqlType;
-import com.facebook.presto.spi.type.StandardTypes;
+import io.prestosql.spi.connector.ConnectorSession;
+import io.prestosql.spi.function.Description;
+import io.prestosql.spi.function.ScalarFunction;
+import io.prestosql.spi.function.SqlType;
+import io.prestosql.spi.type.StandardTypes;
 import io.airlift.slice.Slice;
 import io.airlift.slice.Slices;
 import io.airlift.units.DataSize;
@@ -49,7 +49,7 @@ import static com.qubole.presto.udfs.scalar.hiveUdfs.PrestoDateTimeFunctions.toI
 import static com.qubole.presto.udfs.scalar.hiveUdfs.PrestoDateTimeFunctions.toUnixTimeFromTimestampWithTimeZone;
 import static com.qubole.presto.udfs.scalar.hiveUdfs.PrestoDateTimeFunctions.weekFromTimestamp;
 import static com.qubole.presto.udfs.scalar.hiveUdfs.PrestoDateTimeFunctions.weekFromTimestampWithTimeZone;
-import static com.facebook.presto.spi.type.DateTimeEncoding.packDateTimeWithZone;
+import static io.prestosql.spi.type.DateTimeEncoding.packDateTimeWithZone;
 import static io.airlift.slice.Slices.utf8Slice;
 
 /**

@@ -15,7 +15,7 @@
  */
 package com.qubole.presto.udfs;
 
-import com.facebook.presto.spi.Plugin;
+import io.prestosql.spi.Plugin;
 import com.google.common.collect.ImmutableSet;
 import com.qubole.presto.udfs.scalar.hiveUdfs.ExtendedDateTimeFunctions;
 import com.qubole.presto.udfs.scalar.hiveUdfs.ExtendedMathematicFunctions;

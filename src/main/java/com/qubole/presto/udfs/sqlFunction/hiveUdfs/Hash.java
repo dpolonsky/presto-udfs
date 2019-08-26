@@ -15,21 +15,21 @@
  */
 package com.qubole.presto.udfs.sqlFunction.hiveUdfs;
 
-import com.facebook.presto.util.CompilerUtils;
-import com.facebook.presto.metadata.BoundVariables;
-import com.facebook.presto.metadata.FunctionKind;
-import com.facebook.presto.metadata.FunctionRegistry;
-import com.facebook.presto.metadata.Signature;
-import com.facebook.presto.metadata.SqlScalarFunction;
-import com.facebook.presto.operator.scalar.ScalarFunctionImplementation;
-import com.facebook.presto.spi.PrestoException;
-import com.facebook.presto.spi.block.BlockBuilder;
-import com.facebook.presto.spi.block.BlockBuilderStatus;
-import com.facebook.presto.spi.type.StandardTypes;
-import com.facebook.presto.spi.type.Type;
-import com.facebook.presto.spi.type.TypeManager;
-import com.facebook.presto.sql.gen.CallSiteBinder;
-import com.facebook.presto.type.BigintOperators;
+import io.prestosql.util.CompilerUtils;
+import io.prestosql.metadata.BoundVariables;
+import io.prestosql.metadata.FunctionKind;
+import io.prestosql.metadata.FunctionRegistry;
+import io.prestosql.metadata.Signature;
+import io.prestosql.metadata.SqlScalarFunction;
+import io.prestosql.operator.scalar.ScalarFunctionImplementation;
+import io.prestosql.spi.PrestoException;
+import io.prestosql.spi.block.BlockBuilder;
+import io.prestosql.spi.block.BlockBuilderStatus;
+import io.prestosql.spi.type.StandardTypes;
+import io.prestosql.spi.type.Type;
+import io.prestosql.spi.type.TypeManager;
+import io.prestosql.sql.gen.CallSiteBinder;
+import io.prestosql.type.BigintOperators;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import io.airlift.bytecode.BytecodeBlock;
@@ -46,16 +46,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.facebook.presto.operator.scalar.ScalarFunctionImplementation.ArgumentProperty.valueTypeArgumentProperty;
-import static com.facebook.presto.operator.scalar.ScalarFunctionImplementation.NullConvention.RETURN_NULL_ON_NULL;
-import static com.facebook.presto.operator.scalar.ScalarFunctionImplementation.NullConvention.USE_BOXED_TYPE;
-import static com.facebook.presto.util.CompilerUtils.defineClass;
-import static com.facebook.presto.metadata.Signature.typeVariable;
-import static com.facebook.presto.spi.StandardErrorCode.GENERIC_INTERNAL_ERROR;
-import static com.facebook.presto.spi.StandardErrorCode.INVALID_FUNCTION_ARGUMENT;
-import static com.facebook.presto.spi.type.TypeSignature.parseTypeSignature;
-import static com.facebook.presto.sql.gen.SqlTypeBytecodeExpression.constantType;
-import static com.facebook.presto.util.Reflection.methodHandle;
+import static io.prestosql.operator.scalar.ScalarFunctionImplementation.ArgumentProperty.valueTypeArgumentProperty;
+import static io.prestosql.operator.scalar.ScalarFunctionImplementation.NullConvention.RETURN_NULL_ON_NULL;
+import static io.prestosql.operator.scalar.ScalarFunctionImplementation.NullConvention.USE_BOXED_TYPE;
+import static io.prestosql.util.CompilerUtils.defineClass;
+import static io.prestosql.metadata.Signature.typeVariable;
+import static io.prestosql.spi.StandardErrorCode.GENERIC_INTERNAL_ERROR;
+import static io.prestosql.spi.StandardErrorCode.INVALID_FUNCTION_ARGUMENT;
+import static io.prestosql.spi.type.TypeSignature.parseTypeSignature;
+import static io.prestosql.sql.gen.SqlTypeBytecodeExpression.constantType;
+import static io.prestosql.util.Reflection.methodHandle;
 import static io.airlift.bytecode.Access.FINAL;
 import static io.airlift.bytecode.Access.PRIVATE;
 import static io.airlift.bytecode.Access.PUBLIC;
@@ -162,7 +162,7 @@ public final class Hash
 
         for (int i = 0; i < nativeContainerTypes.size(); i++) {
             Class<?> nativeContainerType = nativeContainerTypes.get(i);
-            Variable currentBlock = scope.declareVariable(com.facebook.presto.spi.block.Block.class, "block" + i);
+            Variable currentBlock = scope.declareVariable(io.prestosql.spi.block.Block.class, "block" + i);
             Variable blockBuilder = scope.declareVariable(BlockBuilder.class, "blockBuilder" + i);
             BytecodeBlock buildBlock = new BytecodeBlock()
                     .comment("blockBuilder%d = typeVariable.createBlockBuilder(new BlockBuilderStatus(),1, 32);", i)
@@ -210,7 +210,7 @@ public final class Hash
             BytecodeBlock storeBlock = new BytecodeBlock()
                     .comment("block%d = blockBuilder%d.build();", i, i)
                     .getVariable(blockBuilder)
-                    .invokeInterface(BlockBuilder.class, "build", com.facebook.presto.spi.block.Block.class)
+                    .invokeInterface(BlockBuilder.class, "build", io.prestosql.spi.block.Block.class)
                     .putVariable(currentBlock);
             buildBlock.append(storeBlock);
             body.append(buildBlock);
@@ -233,7 +233,7 @@ public final class Hash
             BytecodeBlock currentBlockLength = new BytecodeBlock()
                     .append(scope.getVariable("block" + i))
                     .push(0)
-                    .invokeInterface(com.facebook.presto.spi.block.Block.class, "getLength", int.class, int.class)
+                    .invokeInterface(io.prestosql.spi.block.Block.class, "getLength", int.class, int.class)
                     .putVariable(currentBlockLengthVariable);
 
             BytecodeBlock currentHashValueBlock = new BytecodeBlock()
@@ -241,7 +241,7 @@ public final class Hash
                     .push(0)
                     .push(0)
                     .getVariable(currentBlockLengthVariable)
-                    .invokeInterface(com.facebook.presto.spi.block.Block.class, "hash", int.class, int.class, int.class, int.class)
+                    .invokeInterface(io.prestosql.spi.block.Block.class, "hash", int.class, int.class, int.class, int.class)
                     .intToLong()
                     .append(scope.getVariable("range"))
                     .invokeStatic(BigintOperators.class, "modulus", long.class, long.class, long.class)

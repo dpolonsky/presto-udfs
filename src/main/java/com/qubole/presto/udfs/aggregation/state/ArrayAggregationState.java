@@ -15,9 +15,9 @@
  */
 package com.qubole.presto.udfs.aggregation.state;
 
-import com.facebook.presto.spi.function.AccumulatorState;
-import com.facebook.presto.spi.function.AccumulatorStateMetadata;
-import com.facebook.presto.spi.type.Type;
+import io.prestosql.spi.function.AccumulatorState;
+import io.prestosql.spi.function.AccumulatorStateMetadata;
+import io.prestosql.spi.type.Type;
 import io.airlift.slice.SliceOutput;
 
 @AccumulatorStateMetadata(stateFactoryClass = ArrayAggregationStateFactory.class, stateSerializerClass = ArrayAggregationStateSerializer.class)

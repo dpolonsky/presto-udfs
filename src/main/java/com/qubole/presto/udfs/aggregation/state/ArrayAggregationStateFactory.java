@@ -15,11 +15,11 @@
  */
 package com.qubole.presto.udfs.aggregation.state;
 
-import com.facebook.presto.array.LongBigArray;
-import com.facebook.presto.array.ObjectBigArray;
-import com.facebook.presto.operator.aggregation.state.AbstractGroupedAccumulatorState;
-import com.facebook.presto.spi.function.AccumulatorStateFactory;
-import com.facebook.presto.spi.type.Type;
+import io.prestosql.array.LongBigArray;
+import io.prestosql.array.ObjectBigArray;
+import io.prestosql.operator.aggregation.state.AbstractGroupedAccumulatorState;
+import io.prestosql.spi.function.AccumulatorStateFactory;
+import io.prestosql.spi.type.Type;
 import io.airlift.slice.SliceOutput;
 
 public class ArrayAggregationStateFactory

@@ -15,18 +15,18 @@
  */
 package com.qubole.presto.udfs.sqlFunction.hiveUdfs;
 
-import com.facebook.presto.annotation.UsedByGeneratedCode;
-import com.facebook.presto.metadata.BoundVariables;
-import com.facebook.presto.metadata.FunctionKind;
-import com.facebook.presto.metadata.FunctionRegistry;
-import com.facebook.presto.metadata.Signature;
-import com.facebook.presto.metadata.SqlScalarFunction;
-import com.facebook.presto.operator.scalar.ScalarFunctionImplementation;
-import com.facebook.presto.spi.PrestoException;
-import com.facebook.presto.spi.type.Type;
-import com.facebook.presto.spi.type.TypeManager;
-import com.facebook.presto.sql.gen.CallSiteBinder;
-import com.facebook.presto.util.CompilerUtils;
+import io.prestosql.annotation.UsedByGeneratedCode;
+import io.prestosql.metadata.BoundVariables;
+import io.prestosql.metadata.FunctionKind;
+import io.prestosql.metadata.FunctionRegistry;
+import io.prestosql.metadata.Signature;
+import io.prestosql.metadata.SqlScalarFunction;
+import io.prestosql.operator.scalar.ScalarFunctionImplementation;
+import io.prestosql.spi.PrestoException;
+import io.prestosql.spi.type.Type;
+import io.prestosql.spi.type.TypeManager;
+import io.prestosql.sql.gen.CallSiteBinder;
+import io.prestosql.util.CompilerUtils;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import io.airlift.bytecode.BytecodeBlock;
@@ -42,9 +42,9 @@ import java.lang.invoke.MethodHandle;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.facebook.presto.operator.scalar.ScalarFunctionImplementation.ArgumentProperty.valueTypeArgumentProperty;
-import static com.facebook.presto.operator.scalar.ScalarFunctionImplementation.NullConvention.USE_BOXED_TYPE;
-import static com.facebook.presto.util.CompilerUtils.defineClass;
+import static io.prestosql.operator.scalar.ScalarFunctionImplementation.ArgumentProperty.valueTypeArgumentProperty;
+import static io.prestosql.operator.scalar.ScalarFunctionImplementation.NullConvention.USE_BOXED_TYPE;
+import static io.prestosql.util.CompilerUtils.defineClass;
 import static io.airlift.bytecode.Access.FINAL;
 import static io.airlift.bytecode.Access.PRIVATE;
 import static io.airlift.bytecode.Access.PUBLIC;
@@ -52,12 +52,12 @@ import static io.airlift.bytecode.Access.STATIC;
 import static io.airlift.bytecode.Access.a;
 import static io.airlift.bytecode.Parameter.arg;
 import static io.airlift.bytecode.ParameterizedType.type;
-import static com.facebook.presto.metadata.Signature.typeVariable;
-import static com.facebook.presto.spi.StandardErrorCode.GENERIC_INTERNAL_ERROR;
-import static com.facebook.presto.spi.StandardErrorCode.INVALID_FUNCTION_ARGUMENT;
-import static com.facebook.presto.spi.type.TypeSignature.parseTypeSignature;
-import static com.facebook.presto.sql.gen.BytecodeUtils.invoke;
-import static com.facebook.presto.util.Reflection.methodHandle;
+import static io.prestosql.metadata.Signature.typeVariable;
+import static io.prestosql.spi.StandardErrorCode.GENERIC_INTERNAL_ERROR;
+import static io.prestosql.spi.StandardErrorCode.INVALID_FUNCTION_ARGUMENT;
+import static io.prestosql.spi.type.TypeSignature.parseTypeSignature;
+import static io.prestosql.sql.gen.BytecodeUtils.invoke;
+import static io.prestosql.util.Reflection.methodHandle;
 import static java.lang.String.format;
 
 /**
