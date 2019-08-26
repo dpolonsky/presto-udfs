@@ -21,7 +21,7 @@
     <!--
         <air.main.basedir>${project.parent.basedir}</air.main.basedir>
     -->
-        <presto.version>0.193</presto.version>
+        <presto.version>311</presto.version>
         <slice.version>0.15</slice.version>
         <guava.version>18.0</guava.version>
         <javax.inject.version>1</javax.inject.version>
@@ -135,13 +135,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.facebook.presto</groupId>
+            <groupId>io.prestosql</groupId>
             <artifactId>presto-spi</artifactId>
             <version>${presto.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.facebook.presto</groupId>
+            <groupId>io.prestosql</groupId>
             <artifactId>presto-main</artifactId>
             <version>${presto.version}</version>
         </dependency>
